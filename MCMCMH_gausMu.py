@@ -175,7 +175,7 @@ def main():
     ax2.set_title("MCMC Sampling Trace", fontsize=24, y=1.03);
     ax2.set_xlabel("iteration", fontsize=18);
     ax2.set_ylabel("mu", fontsize=18);
-    ax2.set_xlim(0, mcmcN);
+    ax2.set_xlim(-0.03*mcmcN, 1.03*mcmcN);
     #plot 3
     ax3.plot(postNbins, posteriorHist/np.sum(posteriorHist), alpha=1.0, \
              color="blue", linestyle="steps-mid");

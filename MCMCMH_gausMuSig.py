@@ -99,8 +99,8 @@ def main():
     mcmcSigRej = [];
     for i in range(0, mcmcN):
         #MCMC
-        mcmcMuSigVal   = mcmcMuSig/(1.0 + freezF*np.sqrt(i));   #anneal
-        mcmcSigSigVal  = mcmcSigSig/(1.0 + freezF*np.sqrt(i));   #anneal
+        mcmcMuSigVal   = mcmcMuSig/(1.0 + freezF*np.sqrt(i));       #anneal
+        mcmcSigSigVal  = mcmcSigSig/(1.0 + freezF*np.sqrt(i));      #anneal
         mcmcMuValNext  = np.random.normal(mcmcMuVal,  mcmcMuSigVal);
         mcmcSigValNext = np.random.normal(mcmcSigVal, mcmcSigSigVal);
         #Bayesian likelihood/prior
@@ -254,7 +254,7 @@ def main():
     ax2.set_title("MCMC Sampling Trace", fontsize=24, y=1.03);
     ax2.set_xlabel("iteration", fontsize=18);
     ax2.set_ylabel(traceTitle, fontsize=18);
-    ax2.set_xlim(-1, mcmcN);
+    ax2.set_xlim(-0.03*mcmcN, 1.03*mcmcN);
     #plot 3
     res3 = ax3.hexbin(mcmcMuAcc, mcmcSigAcc, cmap="jet",\
                       gridsize=max(10, int(np.sqrt(mcmcN)/2.0)));
