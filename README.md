@@ -8,11 +8,10 @@ In this example, the parameters are the &mu; and &sigma; sampling from a gaussia
 The code runs on python3 with additional packages:
 
     pip3 install scipy
-    pip3 install tqdm
     python3 MCMCMH_gausMuSig.py
 The code outputs the following image:
 
-<img src="https://github.com/SphericalCowww/Stat_MCMC_MetropolisHasting/blob/master/gausMuSig_Display.png" width="630" height="490">
+<img src="https://github.com/SphericalCowww/Stat_MCMC_MetropolisHasting/blob/main/gausMuSig_Display.png" width="630" height="490">
 
 - Top-left: blue distribution are the sample drawn from the red Gaussian curve. The red curve is obtained using the frequentist approach, i.e. the point estimate. The estimated $\mu_{freq}$ and $\sigma_{freq}$ are give in purple. The error of $\sigma_{freq}$ is too difficult to evaluate, and so it is left as if it is unavailable. 
 
@@ -22,3 +21,5 @@ The code outputs the following image:
 
 - Bottom-right: the samples drawn from the MCMC for a distribution for $\mu_{baye}$ and $\sigma_{baye}$, whose values and errors are presented in purple. The Bayesian results are consistent with those of the frequentist.
 
+References:
+- StataCorp LLC's Youtube channel (2016) (<a href="https://www.youtube.com/watch?v=OTO1DygELpY">Youtube</a>)
