@@ -54,7 +54,7 @@ def main():
     thinF = 3;                  #thinning
     freezF = 1.0;               #annealing
 #data
-    nbins = np.linspace(rangeX[0], rangeX[1], binN);
+    nbins = np.linspace(rangeX[0], rangeX[1], binN+1)[:-1];
     dataPDF = np.random.normal(dataMu, dataSig, dataN);
     dataHist = np.zeros(binN);
     for x in dataPDF:
@@ -64,7 +64,7 @@ def main():
     for i, val in enumerate(nbins):
         priorHist[i] = uniform(rangeX[0], rangeX[1], val);
 #MCMC
-    iteration = np.linspace(0, mcmcN, mcmcN);
+    iteration = np.linspace(0, mcmcN, mcmcN+1)[:-1];
     mcmcMuVal = np.copy(mcmcMuMuInit);
     mcmcMu = np.zeros(mcmcN);
     
@@ -109,14 +109,12 @@ def main():
     rangeR = 2.0/np.sqrt(mcmcN);
     postRangeX = [rangeX[0]*rangeR + np.average(mcmcMuAcc), \
                   rangeX[1]*rangeR + np.average(mcmcMuAcc)];
-    postNbins = np.linspace(postRangeX[0], postRangeX[1], binN);
+    postNbins = np.linspace(postRangeX[0], postRangeX[1], binN+1)[:-1];
     posteriorHist = np.zeros(binN);
     for x in mcmcMuAcc:
         if postRangeX[0] < x and x < postRangeX[1]:
             posteriorHist[int(binN*(x-postRangeX[0])\
                                   /(postRangeX[1]-postRangeX[0]))] += 1;
-
-
 
 
 #plots
@@ -128,7 +126,7 @@ def main():
     ax3 = fig.add_subplot(gs[3]);
     #plot 0
     gaussPlot = gaussian(dataMu, dataSig, nbins);
-    ax0.plot(nbins, dataHist, linewidth=2, color="blue", linestyle="steps-mid");
+    ax0.plot(nbins, dataHist, linewidth=2, color="blue", drawstyle="steps-post");
     ax0.plot(nbins, gaussPlot*np.sum(dataHist)/np.sum(gaussPlot), linewidth=2, \
              alpha=0.8, color="red")
     ax0.axhline(y=0, color="black", linestyle="-");
@@ -149,7 +147,7 @@ def main():
     font = {"family": "serif", "color": "green", "weight": "bold", "size": 18};
     ax0.text(expVal0, 0.92*(ymax-ymin), freqStr, fontdict=font); 
     #plot 1
-    ax1.plot(nbins, priorHist, alpha=1.0, color="blue", linestyle="steps-mid");
+    ax1.plot(nbins, priorHist, alpha=1.0, color="blue", drawstyle="steps-post");
     ax1.axhline(y=0, color="black", linestyle="-");
     ymin, ymax = ax1.get_ylim();
     yLow   = (0 - ymin)/(ymax - ymin);
@@ -164,8 +162,8 @@ def main():
     ax1.set_ylabel("amplitude", fontsize=18);
     ax1.set_xlim(rangeX[0]-1.0, rangeX[1]+1.0);
     #plot 2
-    ax2.plot(iteration, mcmcMu, alpha=1.0, color="black", ls="steps-mid",\
-             zorder=0);
+    ax2.plot(iteration, mcmcMu, alpha=1.0, color="black",\
+             drawstyle="steps-post", zorder=0);
     ax2.scatter(iterAcc, mcmcMuAcc, alpha=0.8, color="blue", marker="o",\
                 s=20, zorder=1);
     ax2.scatter(iterRej, mcmcMuRej, alpha=0.8, color="red", marker="x",\
@@ -178,7 +176,7 @@ def main():
     ax2.set_xlim(-0.03*mcmcN, 1.03*mcmcN);
     #plot 3
     ax3.plot(postNbins, posteriorHist/np.sum(posteriorHist), alpha=1.0, \
-             color="blue", linestyle="steps-mid");
+             color="blue", drawstyle="steps-post");
     ax3.axhline(y=0, color="black", linestyle="-");
     ax3.axvline(x=np.average(mcmcMuAcc), ymin=0, ymax=1, color="green", \
                 linestyle="--");

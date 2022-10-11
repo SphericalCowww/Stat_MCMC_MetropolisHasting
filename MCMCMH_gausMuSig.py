@@ -66,7 +66,7 @@ def main():
 
     traceOption = "sig";        #for display
 #data
-    nbins = np.linspace(rangeX[0], rangeX[1], binN);
+    nbins = np.linspace(rangeX[0], rangeX[1], binN+1)[:-1];
     dataPDF = np.random.normal(dataMu, dataSig, dataN);
     dataHist = np.zeros(binN);
     for x in dataPDF:
@@ -86,7 +86,7 @@ def main():
         print("The initial sigma value is incompatible with the prior.");
         exit(0);
 
-    iteration = np.linspace(0, mcmcN, mcmcN);
+    iteration = np.linspace(0, mcmcN, mcmcN+1)[:-1];
     mcmcMuVal  = np.copy(mcmcMuMuInit);
     mcmcSigVal = np.copy(mcmcSigMuInit);
     mcmcMu  = np.zeros(mcmcN);
@@ -158,8 +158,6 @@ def main():
 
 
 
-
-
 #plots
     fig = plt.figure(figsize=(18, 14));
     gs = gridspec.GridSpec(2, 2);
@@ -169,7 +167,7 @@ def main():
     ax3 = fig.add_subplot(gs[3]);
     #plot 0
     gaussPlot = gaussian(dataMu, dataSig, nbins);
-    ax0.plot(nbins, dataHist, linewidth=2, color="blue", linestyle="steps-mid");
+    ax0.plot(nbins, dataHist, linewidth=2, color="blue", drawstyle="steps-post");
     ax0.plot(nbins, gaussPlot*np.sum(dataHist)/np.sum(gaussPlot), linewidth=2, \
              alpha=0.8, color="red")
     ax0.axhline(y=0, color="black", linestyle="-");
@@ -243,8 +241,8 @@ def main():
         accPlot    = mcmcSigAcc;
         rejPlot    = mcmcSigRej;
         traceTitle = "sigma";
-    ax2.plot(iteration, tracePlot, alpha=1.0, color="black", ls="steps-mid",\
-             zorder=0);
+    ax2.plot(iteration, tracePlot, alpha=1.0, color="black",\
+             drawstyle="steps-post", zorder=0);
     ax2.scatter(iterAcc, accPlot, alpha=0.8, color="blue", marker="o",\
                 s=20, zorder=2);
     ax2.scatter(iterRej, rejPlot, alpha=0.8, color="red", marker="x",\
