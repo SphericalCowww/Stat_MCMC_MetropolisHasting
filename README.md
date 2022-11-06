@@ -17,7 +17,7 @@ The code outputs the following image:
 
 - Top-right: the prior distribution for $\mu_{baye}$ and $\sigma_{baye}$, both are gaussians centered at 0 and have standard deviations of 2.0. 
 
-- Bottom-left: the trace of MCMC for $\sigma_{baye}$ is shown by the black curve. There are 10,000 iteration samples. The blue dots represent the MCMC values accepted by the Metropolis Hasting algorithm and the red crosses rejected. The first 1/10 of the iteration are cut out (trimming) to account from the effects of the initial conditions ($\mu_{baye}(t=0) = 0.0$ and $\sigma_{baye}(t=0)=1.0$); about 2/3 of the accepted values are removed (thinning) to mitigate the effect of autocorrelation from the Markov chain; the gaussian drawn from the Monte Carlo shrinks in width (annealing) over iterations for a faster convergence. 
+- Bottom-left: the trace of MCMC for $\sigma_{baye}$ is shown by the black curve. There are 10,000 iteration samples. The blue dots represent the MCMC values accepted by the Metropolis Hasting algorithm and the red crosses rejected. The first 1/10 of the iteration are cut out (trimming) to account from the effects of the initial conditions ($\mu_{baye}(t=0) = 0.0$ and $\sigma_{baye}(t=0)=1.0$); about 2/3 of the accepted values are removed (thinning) to mitigate the effect of autocorrelation from the Markov chain; the gaussian proposal step drawn from the Monte Carlo shrinks in width (annealing) over iterations for a faster convergence. 
 
 - Bottom-right: the samples drawn from the MCMC for a distribution for $\mu_{baye}$ and $\sigma_{baye}$, whose values and errors are presented in purple. The Bayesian results are consistent with those of the frequentist.
 
