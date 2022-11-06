@@ -19,7 +19,15 @@ The code outputs the following image:
 
 - Bottom-left: the trace of MCMC for $\sigma_{baye}$ is shown by the black curve. There are 10,000 iteration samples. The blue dots represent the MCMC values accepted by the Metropolis Hasting algorithm and the red crosses rejected. The first 1/10 of the iteration are cut out (trimming) to account from the effects of the initial conditions ($\mu_{baye}(t=0) = 0.0$ and $\sigma_{baye}(t=0)=1.0$); about 2/3 of the accepted values are removed (thinning) to mitigate the effect of autocorrelation from the Markov chain; the gaussian proposal step drawn from the Monte Carlo shrinks in width (annealing) over iterations for a faster convergence. 
 
-- Bottom-right: the samples drawn from the MCMC for a distribution for $\mu_{baye}$ and $\sigma_{baye}$, whose values and errors are presented in purple. The Bayesian results are consistent with those of the frequentist.
+- Bottom-right: the samples drawn from the MCMC for a distribution for $\mu_{baye}$ and $\sigma_{baye}$, whose values and errors are presented in purple. The Bayesian results are consistent with those of the frequentist. 
+
+The code also outputs the following image:
+
+<img src="https://github.com/SphericalCowww/Stat_MCMC_MetropolisHasting/blob/main/gausMuSigAuto_Display.png" width="630" height="245">
+
+The image shows the autocorrelation of the $\mu$ & $\sigma$ traces up to a step lag of 100. The amplitude mean subtracted and normalized to the std to the corresponding $\mu$ & $\sigma$ values. The thinning step is chosen to be 3, i.e.~ randomly drop 2/3 of the accepted proposals; from their autocorrelation, we can see this thinning step is too small.
+
+Note: the cross-correlation definition used to compute the autocorrelation is "of deterministic signals", which is different from the cross-correlation "of random vectors" (<a href="https://en.wikipedia.org/wiki/Cross-correlation">Wiki</a>).
 
 References:
 - StataCorp LLC's Youtube channel (2016) (<a href="https://www.youtube.com/watch?v=OTO1DygELpY">Youtube</a>)
